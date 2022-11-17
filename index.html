@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="conatiner" style="width: 100%; height: 100%; display: flex; flex-direction: column;
+        align-items: center;">
+            <input type="text" value="0.11050;0.03000;0;0.1;0.5841;5;9.81" placeholder="M;R1;R2;x;t;α;g" style="width: 250px;">
+            <div style="margin-top: 20px;">
+                <button class="calculate" id="0">cylinder</button>
+                <button class="calculate" id="1">ring</button>
+                <button class="calculate" id="2">hoop</button>
+                <button class="calculate" id="3">sphere</button>
+            </div>
+        </div>
+
+
+
+        <p class="i"></p>
+        <p class="mr"></p>
+        <p class="1imr"></p>
+        <p class="l"></p>
+        <p class="a"></p>
+        <p class="aStrih"></p>
+        <p class="error1"></p>
+        <p class="v"></p>
+        <p class="h"></p>
+        <p class="u"></p>
+        <p class="k"></p>
+        <p class="error12"></p>
+
+
+    </div>
+
+
+    <script>
+
+        let input = document.querySelector('input');
+        let button = document.querySelectorAll('.calculate');
+        let p = document.querySelectorAll('p');
+
+        button[0].addEventListener('click', calc);
+        button[1].addEventListener('click', calc);
+        button[2].addEventListener('click', calc);
+        button[3].addEventListener('click', calc);
+
+        function calc(){
+            let id = this.id;
+            let res = 0
+            data = input.value.split(/\s*;\s*/);
+    
+            console.log(data);
+
+            let m = Number(data[0]);
+            let r1 = Number(data[1]);
+            let r2 = Number(data[2]);
+            let x = Number(data[3]);
+            let t = Number(data[4]);
+            let a = Number(data[5]);
+            let g = Number(data[6]);
+
+            if(id == 0){
+                var I = 0.5 * m * r1 * r1;
+                I = I.toFixed(10);
+                p[0].innerHTML = "I: " + I;
+            }else if(id == 1){
+                var I = 0.5 * m * (r1 * r1 + r2 * r2);
+                I = I.toFixed(10);
+                p[0].innerHTML = "I: " + I;
+            }else if(id == 2){
+                var I = m * r1 *r1;
+                I = I.toFixed(10);
+                p[0].innerHTML = "I: " + I;
+            }else{
+                var I = 0.4 * m * r1 *r1;
+                I = I.toFixed(10);
+                p[0].innerHTML = "I: " + I;
+            }
+
+                res = m * r1 * r1;
+                res = res.toFixed(10);
+                p[1].innerHTML = "MR2: " + res;
+            
+                res = 1 + ((I) / (m * r1 * r1));
+                res = res.toFixed(10);
+                p[2].innerHTML = "1 + ((I) / (MR^2)): " + res;
+
+                let l = 3 * x;
+                l = l.toFixed(10);
+                p[3].innerHTML = "l: " + l;
+
+                let ac = (2 * x) / (t * t);
+                ac = ac.toFixed(10);
+                p[4].innerHTML = "a: " + ac;
+
+                let acs = (g * Math.sin((a * 3.14 / 180))) / (1 + ((I) / (m * r1 * r1)));
+                acs = acs.toFixed(10);
+                p[5].innerHTML = "a': " + acs;
+
+                res = (Math.abs((ac - acs)) / (acs)) * 100;
+                res = res.toFixed(10);
+                p[6].innerHTML = "Error1: " + res;
+
+                let v = 2 * ac * t;
+                v = v.toFixed(10);
+                p[7].innerHTML = "v: " + v;
+
+               let h = (Number(l) + Number(x)) * Math.sin((a * 3.14 / 180)); 
+               console.log(Number(l) + Number(x));
+                h = h.toFixed(10);
+                p[8].innerHTML = "h: " + h;
+
+                let u = m * g * h;
+                u = u.toFixed(10);
+                p[9].innerHTML = "U: " + u;
+
+                let k = 0.5 * m * v * v * (1 + ((I) / (m * r1 * r1)));
+                k = k.toFixed(10);
+                p[10].innerHTML = "K: " + k;
+
+                res = (Math.abs((u - k)) / u) * 100;
+                res = res.toFixed(10);
+                p[11].innerHTML = "Error2: " + res;
+
+
+        }
+
+
+    </script>
+</body>
+</html>
