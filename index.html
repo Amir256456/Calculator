@@ -12,7 +12,8 @@
 
         <div class="conatiner" style="width: 100%; height: 100%; display: flex; flex-direction: column;
         align-items: center;">
-            <input type="text" placeholder="R;L;5T" style="width: 250px;">
+            <h4>Pi: 3.14159265358979323846264338327950288419716939937510582097494</h1>
+            <input type="text" placeholder="R;L;5T;pi" style="width: 250px;">
             <div style="margin-top: 20px;">
                 <button class="calculate" id="0">Calculate(*)</button>
                 <button class="calculate" id="1">Calculate(+)</button> 
@@ -37,10 +38,12 @@
         let button = document.querySelectorAll('.calculate');
         let p = document.querySelectorAll('p');
 
-        button.addEventListener('click', calc);
+        button[0].addEventListener('click', calc);
+        button[1].addEventListener('click', calc);
+        button[2].addEventListener('click', calc);
 
         function calc(){
-            let id = this.id
+            let id = this.id;
             data = input.value.split(/\s*;\s*/);
     
             console.log(data);
@@ -48,17 +51,19 @@
             let r = Number(data[0]);
             let l = Number(data[1]);
             let t5 = Number(data[2]);
+            let pi = Number(data[3]);
+
 
             let t = Number(t5) / 5;
             p[0].innerHTML = "T: " + t.toFixed(20);
             p[1].innerHTML = "T^2: " + (t * t).toFixed(20);
 
             if(id == 0){
-                let g = (((2 * Math.PI ** 2) / (t ** 2)) * ((r ** 2 + 2 * l ** 2) / l));
+                let g = (((2 * pi ** 2) / (t ** 2)) * ((r ** 2 + 2 * l ** 2) / l));
             }else if(id == 1){
-                let g = (((2 * Math.PI ** 2) / (t ** 2)) + ((r ** 2 + 2 * l ** 2) / l));
+                let g = (((2 * pi ** 2) / (t ** 2)) + ((r ** 2 + 2 * l ** 2) / l));
             }else{
-                let g = (((2 * Math.PI ** 2) / (t ** 2)) - ((r ** 2 + 2 * l ** 2) / l));
+                let g = (((2 * pi ** 2) / (t ** 2)) - ((r ** 2 + 2 * l ** 2) / l));
             }
             
 
