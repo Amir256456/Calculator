@@ -14,7 +14,9 @@
         align-items: center;">
             <input type="text" placeholder="R;L;5T" style="width: 250px;">
             <div style="margin-top: 20px;">
-                <button class="calculate" id="0">Calculate</button>  
+                <button class="calculate" id="0">Calculate(*)</button>
+                <button class="calculate" id="1">Calculate(+)</button> 
+                <button class="calculate" id="2">Calculate(-)</button>   
             </div>
         </div>
 
@@ -32,12 +34,13 @@
 
 
         let input = document.querySelector('input');
-        let button = document.querySelector('.calculate');
+        let button = document.querySelectorAll('.calculate');
         let p = document.querySelectorAll('p');
 
         button.addEventListener('click', calc);
 
         function calc(){
+            let id = this.id
             data = input.value.split(/\s*;\s*/);
     
             console.log(data);
@@ -49,8 +52,16 @@
             let t = Number(t5) / 5;
             p[0].innerHTML = "T: " + t.toFixed(20);
             p[1].innerHTML = "T^2: " + (t * t).toFixed(20);
+
+            if(id == 0){
+                let g = (((2 * Math.PI ** 2) / (t ** 2)) * ((r ** 2 + 2 * l ** 2) / l));
+            }else if(id == 1){
+                let g = (((2 * Math.PI ** 2) / (t ** 2)) + ((r ** 2 + 2 * l ** 2) / l));
+            }else{
+                let g = (((2 * Math.PI ** 2) / (t ** 2)) - ((r ** 2 + 2 * l ** 2) / l));
+            }
             
-            let g = (((2 * Math.PI ** 2) / (t ** 2)) * ((r ** 2 + 2 * l ** 2) / l));
+
             p[2].innerHTML = "g: " + g.toFixed(20);
             p[3].innerHTML = "error: " + ((Math.abs(g - 9.81) / 9.81) * 100).toFixed(20);
 
