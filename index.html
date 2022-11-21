@@ -42,28 +42,29 @@
         button[1].addEventListener('click', calc);
         button[2].addEventListener('click', calc);
 
+
+
         function calc(){
             let id = this.id;
             data = input.value.split(/\s*;\s*/);
-    
-            console.log(data);
 
             let r = Number(data[0]);
             let l = Number(data[1]);
             let t5 = Number(data[2]);
             let pi = Number(data[3]);
-
-
             let t = Number(t5) / 5;
+
             p[0].innerHTML = "T: " + t.toFixed(20);
             p[1].innerHTML = "T^2: " + (t * t).toFixed(20);
 
+            let g = 0;
+
             if(id == 0){
-                let g = (((2 * pi ** 2) / (t ** 2)) * ((r ** 2 + 2 * l ** 2) / l));
+                g = (((2 * pi ** 2) / (t ** 2)) * ((r ** 2 + 2 * l ** 2) / l));
             }else if(id == 1){
-                let g = (((2 * pi ** 2) / (t ** 2)) + ((r ** 2 + 2 * l ** 2) / l));
+                g = (((2 * pi ** 2) / (t ** 2)) + ((r ** 2 + 2 * l ** 2) / l));
             }else{
-                let g = (((2 * pi ** 2) / (t ** 2)) - ((r ** 2 + 2 * l ** 2) / l));
+                g = (((2 * pi ** 2) / (t ** 2)) - ((r ** 2 + 2 * l ** 2) / l));
             }
             
 
