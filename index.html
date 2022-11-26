@@ -8,68 +8,97 @@
 </head>
 <body>
 
-    <div class="container">
+
 
         <div class="conatiner" style="width: 100%; height: 100%; display: flex; flex-direction: column;
         align-items: center;">
-            <h4>Pi: 3.14159265358979323846264338327950288419716939937510582097494</h1>
-            <input type="text" placeholder="R;L;5T;pi" style="width: 250px;">
+        <h1>First part</h1>
+            <input type="text" placeholder="f;l;n;v" style="width: 250px;">
             <div style="margin-top: 20px;">
-                <button class="calculate" id="0">Calculate(*)</button>
-                <button class="calculate" id="1">Calculate(+)</button> 
-                <button class="calculate" id="2">Calculate(-)</button>   
+                <button class="calculate" id="0">Calculate</button> 
             </div>
-        </div>
 
 
 
-        <p class="t"></p>
-        <p class="t^2"></p>
-        <p class="g"></p>
+
+        <p class="wave"></p>
+        <p class="vN"></p>
+        <p class="error"></p>
+
+
+        <h1>Second part</h1>
+            <input type="text" placeholder="l;f;wave;m;mi" style="width: 250px;">
+            <div style="margin-top: 20px;">
+                <button class="calculate" id="1">Calculate</button> 
+            </div>
+
+
+
+
+        <p class="T^1/2"></p>
+        <p class="v"></p>
+        <p class="v0"></p>
         <p class="error"></p>
 
     </div>
 
 
+
     <script>
 
 
-        let input = document.querySelector('input');
+        let input = document.querySelectorAll('input');
         let button = document.querySelectorAll('.calculate');
         let p = document.querySelectorAll('p');
 
         button[0].addEventListener('click', calc);
         button[1].addEventListener('click', calc);
-        button[2].addEventListener('click', calc);
-
 
 
         function calc(){
             let id = this.id;
-            data = input.value.split(/\s*;\s*/);
-
-            let r = Number(data[0]);
-            let l = Number(data[1]);
-            let t5 = Number(data[2]);
-            let pi = Number(data[3]);
-            let t = Number(t5) / 5;
-
-            p[0].innerHTML = "T: " + t.toFixed(20);
-            p[1].innerHTML = "T^2: " + (t * t).toFixed(20);
-
-            let g = 0;
-
+            console.log(id);
             if(id == 0){
-                g = (((2 * pi ** 2) / (t ** 2)) * ((r ** 2 + 2 * l ** 2) / l));
-            }else if(id == 1){
-                g = (((2 * pi ** 2) / (t ** 2)) + ((r ** 2 + 2 * l ** 2) / l));
-            }else{
-                g = (((2 * pi ** 2) / (t ** 2)) - ((r ** 2 + 2 * l ** 2) / l));
-            }
-            
+                data = input[0].value.split(/\s*;\s*/);
 
-            p[2].innerHTML = "g: " + g.toFixed(20);
-            p[3].innerHTML = "error: " + ((Math.abs(g - 9.81) / 9.81) * 100).toFixed(20);
+                let f = Number(data[0]);
+                let l = Number(data[1]);
+                let n = Number(data[2]);
+                let v = Number(data[3]);
+
+
+                let wave = 2 * l / n;
+                p[0].innerHTML = "waveLength: " + wave.toFixed(20);
+
+                let vN = wave * f;
+                p[1].innerHTML = "vN: " + vN.toFixed(20);
+                p[2].innerHTML = "error: " + ((Math.abs(v - vN) / v) * 100).toFixed(20);
+            }else{
+
+                data = input[1].value.split(/\s*;\s*/);
+
+                let l = Number(data[0]);
+                let f = Number(data[1]);
+                let wave = Number(data[2]);
+                let m = Number(data[3]);
+                let mi = Number(data[4]);
+
+                t = (m * 9.81) ** 1/2;
+                p[3].innerHTML = "T^1/2: " + t.toFixed(20);
+
+                let v = wave * f;
+                p[4].innerHTML = "v: " + v.toFixed(20);
+
+                let v0 = t / (mi ** 1/2)
+                p[5].innerHTML = "v0: " + v0.toFixed(20);
+
+                p[6].innerHTML = "error: " + ((Math.abs(v - v0) / v0) * 100).toFixed(20);
+
+
+            }
+
+
+            
 
         }
 
