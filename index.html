@@ -91,7 +91,8 @@
                 let v = wave * f;
                 p[4].innerHTML = "v: " + v.toFixed(20);
 
-                let v0 = t / (mu ** 1/2)
+                console.log(t, Math.sqrt(mu, 2));
+                let v0 = t / Math.sqrt(mu, 2)
                 p[5].innerHTML = "v0: " + v0.toFixed(20);
 
                 p[6].innerHTML = "error: " + ((Math.abs(v - v0) / v0) * 100).toFixed(20);
