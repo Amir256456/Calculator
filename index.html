@@ -27,7 +27,7 @@
 
 
         <h1>Second part</h1>
-            <input type="text" placeholder="l;f;wave;m;mi" style="width: 250px;">
+            <input type="text" placeholder="l;f;wave;m;mu;g" style="width: 250px;">
             <div style="margin-top: 20px;">
                 <button class="calculate" id="1">Calculate</button> 
             </div>
@@ -81,15 +81,17 @@
                 let f = Number(data[1]);
                 let wave = Number(data[2]);
                 let m = Number(data[3]);
-                let mi = Number(data[4]);
+                let mu = Number(data[4]);
+                let g = Number(data[5]);
 
-                t = (m * 9.81) ** 1/2;
+
+                t = Math.sqrt(m * g, 2);
                 p[3].innerHTML = "T^1/2: " + t.toFixed(20);
 
                 let v = wave * f;
                 p[4].innerHTML = "v: " + v.toFixed(20);
 
-                let v0 = t / (mi ** 1/2)
+                let v0 = t / (mu ** 1/2)
                 p[5].innerHTML = "v0: " + v0.toFixed(20);
 
                 p[6].innerHTML = "error: " + ((Math.abs(v - v0) / v0) * 100).toFixed(20);
